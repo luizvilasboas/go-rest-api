@@ -21,3 +21,10 @@ func HandleGetPersonalityById(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&p, id)
 	json.NewEncoder(w).Encode(p)
 }
+
+func HandleCreatePersonality(w http.ResponseWriter, r *http.Request) {
+	var p models.Personality
+	json.NewDecoder(r.Body).Decode(&p)
+	database.DB.Create(&p)
+	json.NewEncoder(w).Encode(p)
+}
