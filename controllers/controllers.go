@@ -28,3 +28,10 @@ func HandleCreatePersonality(w http.ResponseWriter, r *http.Request) {
 	database.DB.Create(&p)
 	json.NewEncoder(w).Encode(p)
 }
+
+func HandleDeletePersonality(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	var p models.Personality
+	database.DB.Delete(&p, id)
+	json.NewEncoder(w).Encode(p)
+}
