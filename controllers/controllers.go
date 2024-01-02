@@ -35,3 +35,12 @@ func HandleDeletePersonality(w http.ResponseWriter, r *http.Request) {
 	database.DB.Delete(&p, id)
 	json.NewEncoder(w).Encode(p)
 }
+
+func HandleUpdatePersonality(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	var p models.Personality
+	database.DB.First(&p, id)
+	json.NewDecoder(r.Body).Decode(&p)
+	database.DB.Save(&p)
+	json.NewEncoder(w).Encode(p)
+}
